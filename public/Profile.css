@@ -1,0 +1,615 @@
+/* ===== إعادة تعيين عام ===== */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --text-white: #ffffff;
+    --text-light: rgba(255, 255, 255, 0.85);
+    --shadow-heavy: 0 25px 50px rgba(0, 0, 0, 0.4);
+    --font-family: 'Tajawal', sans-serif;
+    --gold: #fdcb6e;
+    --green: #00b894;
+    --red: #ff4757;
+    --blue: #3742fa;
+    --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+}
+
+body {
+    font-family: var(--font-family);
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    direction: rtl;
+    color: var(--text-white);
+    padding: 20px;
+}
+
+/* ===== عناصر سريعة ===== */
+.navbar,
+.profile-container {
+    will-change: auto;
+    backface-visibility: hidden;
+}
+
+/* ===== الشريط العلوي ===== */
+.navbar {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--glass-border);
+    border-radius: 60px;
+    padding: 8px 25px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-heavy);
+    overflow: hidden;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-brand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 3px;
+}
+
+.nav-brand h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-white);
+}
+
+.nav-brand h2 span {
+    color: var(--gold);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav-actions a {
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.15s;
+    font-family: var(--font-family);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text-white);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #fff;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    margin: 0 3px;
+    object-fit: cover;
+}
+
+/* ===== الحاوية الرئيسية ===== */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--glass-border);
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: var(--shadow-heavy);
+    overflow: hidden;
+}
+
+/* ===== رأس البروفايل ===== */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px 20px;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover;
+    background: #1e1e2f;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.profile-bio {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.profile-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    flex-wrap: wrap;
+}
+
+.profile-meta i {
+    margin-left: 5px;
+    color: var(--gold);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-edit-profile {
+    padding: 10px 24px;
+    background: var(--gold);
+    color: #1e1e2f;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    will-change: transform;
+}
+
+.btn-edit-profile:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(253, 203, 110, 0.4);
+}
+
+/* ===== الإحصائيات ===== */
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 5px 0 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* ===== علامات التبويب ===== */
+.profile-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 6px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 50px;
+    background: transparent;
+    color: var(--text-light);
+    font-weight: 700;
+    font-family: var(--font-family);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+    background: var(--gold);
+    color: #1e1e2f;
+    box-shadow: 0 5px 20px rgba(253, 203, 110, 0.3);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== المنشورات ===== */
+.posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 20px;
+    transition: 0.2s;
+    will-change: transform;
+}
+
+.post-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.post-type {
+    display: inline-block;
+    padding: 3px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(253, 203, 110, 0.15);
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.post-type.provider-type {
+    background: rgba(0, 184, 148, 0.15);
+    color: var(--green);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.post-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.post-user-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.post-user-info span {
+    font-size: 13px;
+    opacity: 0.6;
+}
+
+.post-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.post-description {
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.post-footer {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: var(--text-light);
+    opacity: 0.8;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.post-footer i {
+    margin-left: 5px;
+    color: var(--gold);
+}
+
+.post-cta button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-family: var(--font-family);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.cta-logged-in {
+    background: rgba(253, 203, 110, 0.15);
+    color: var(--gold);
+    border: 1px solid var(--gold) !important;
+}
+
+.cta-logged-in:hover {
+    background: var(--gold);
+    color: #1e1e2f;
+}
+
+.cta-logged-in i {
+    margin-left: 6px;
+}
+
+.post-cta a {
+    text-decoration: none;
+}
+
+/* ===== محفظة الأعمال ===== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.portfolio-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-item .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.portfolio-item:hover .overlay {
+    opacity: 1;
+}
+
+.portfolio-item .overlay button {
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: none;
+    background: var(--red);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-family);
+}
+
+.portfolio-item .overlay button:hover {
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+}
+
+.portfolio-item.add-item {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.portfolio-item.add-item:hover {
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ===== رفع الملفات ===== */
+.upload-area {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.upload-area:hover {
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.upload-area input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+}
+
+/* ===== الطلبات ===== */
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.order-item .info h4 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.order-item .info p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.status {
+    padding: 4px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.status.pending {
+    background: rgba(253, 203, 110, 0.2);
+    color: var(--gold);
+}
+
+.status.active {
+    background: rgba(55, 66, 250, 0.2);
+    color: var(--blue);
+}
+
+.status.completed {
+    background: rgba(0, 184, 148, 0.2);
+    color: var(--green);
+}
+
+/* ===== إلغاء التأثيرات على الأجهزة الضعيفة ===== */
+@media (prefers-reduced-motion: reduce), (max-width: 768px) {
+    .navbar,
+    .profile-container {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(0, 0, 0, 0.75);
+    }
+    .navbar {
+        background: rgba(0, 0, 0, 0.85);
+    }
+    .profile-container {
+        background: rgba(0, 0, 0, 0.8);
+    }
+    .post-card:hover,
+    .portfolio-item:hover {
+        transform: none !important;
+    }
+    .btn-edit-profile:hover {
+        transform: none !important;
+    }
+}
+
+/* ===== توافق الجوال ===== */
+@media (max-width: 768px) {
+    .profile-container { padding: 15px; border-radius: 25px; }
+    .profile-header { flex-direction: column; align-items: center; text-align: center; margin-top: 0; }
+    .profile-avatar { width: 90px; height: 90px; }
+    .profile-name { font-size: 1.6rem; }
+    .profile-meta { justify-content: center; }
+    .profile-actions { justify-content: center; width: 100%; }
+    .profile-tabs { flex-wrap: wrap; border-radius: 30px; }
+    .tab-btn { font-size: 14px; padding: 10px; }
+    .portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .profile-avatar { width: 75px; height: 75px; }
+    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+    .tab-btn { font-size: 12px; padding: 8px 6px; }
+}
