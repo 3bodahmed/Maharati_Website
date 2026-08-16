@@ -65,6 +65,7 @@
             <h1><i class="fas fa-user-edit"></i> تعديل <span>الملف الشخصي</span></h1>
             <a href="{{ route('profile') }}" class="btn-cancel"><i class="fas fa-arrow-right"></i> العودة للملف</a>
         </div>
+        
 
         <form id="editProfileForm" class="edit-form" enctype="multipart/form-data" method="POST" action="{{route('CreateProfile')}}">
             @csrf

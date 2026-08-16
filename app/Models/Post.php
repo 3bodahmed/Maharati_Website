@@ -9,8 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $table = 'post'; // إذا كان الجدول اسمه posts
-
+protected $table = 'post';
     protected $fillable = [
         'typeRequest',   // ✅ أضف هذا الحقل
         'title',

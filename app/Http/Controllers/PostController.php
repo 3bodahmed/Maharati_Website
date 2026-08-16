@@ -56,7 +56,7 @@ class PostController extends Controller
             'user_id'     => Auth::id(),
         ]);
 
-        return redirect()->back()->with('success');
+        return redirect()->back()->with('success',);
     }
 
 }

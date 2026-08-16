@@ -75,9 +75,7 @@
                 @endphp
 
                 <div class="post-card post-client">
-                <div class="post-type " style="background-color: white;color:black;">
-                    <i class="fas fa-user-plus"></i> متابعه
-                </div>
+                
                 <div class="post-type {{ $post->typeRequest === 'provider' ? 'provider-type' : '' }}">
                 @if ($post->typeRequest === 'client')
                 

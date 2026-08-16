@@ -19,12 +19,14 @@ class profile extends Model
         'location',
         'description',
         'image',
+        'works', 
         'user_id',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'image' => 'array',
+        'works' => 'array',
     ];
 
     public function user()
