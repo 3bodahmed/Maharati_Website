@@ -3,9 +3,61 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="SignUpScreen.css" />
+        <link rel="stylesheet" href="{{ asset('style.css') }}" />
         <title>إنشاء حساب - مهارتي</title>
         <link rel="icon" href="Logo.png" />
+
+        <style>
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: #fff;
+        }
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .facebook-btn {
+            background: #1877f2;
+        }
+        .facebook-btn:hover {
+            background: #0d65d9;
+            color: white;
+        }
+        .google-btn {
+            background: #db4437;
+        }
+        .google-btn:hover {
+            background: #c23321;
+            color: white;
+        }
+        .guest-btn {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .guest-btn:hover {
+            background: #2a2a4e;
+            color: white;
+        }
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+    </style>
     </head>
     <body>
      @if ($errors->any())
@@ -73,9 +125,21 @@
                 <div class="divider"><h1>أو</h1></div>
 
                 <div class="social-login">
-                    <button class="facebook-login">فيسبوك</button>
-                    <button class="google-login">جوجل</button>
-                </div>
+                {{-- فيسبوك --}}
+                <a href="{{ route('facebook.redirect') }}" class="social-btn facebook-btn">
+                    <i class="fab fa-facebook-f"></i> فيسبوك
+                </a>
+
+                {{-- جوجل (اختياري، يمكنك إزالته إذا أردت) --}}
+                <a href="{{ route('google.redirect') }}" class="social-btn google-btn">
+                    <i class="fab fa-google"></i> جوجل
+                </a>
+
+                {{-- بدون تسجيل دخول --}}
+                <a href="{{ route('ShowVisitorHome') }}" class="social-btn guest-btn">
+                    <i class="fas fa-user"></i> بدون تسجيل دخول
+                </a>
+            </div>
 
                 <div class="register-link">
                     <p>لديك حساب بالفعل؟ <a href="/login">سجل دخول الآن</a></p>
@@ -85,6 +149,9 @@
         </div>
           
     </body>
+    <footer class="guest-footer">
+        <p>© 2026 <span>مهارتي</span> - جميع الحقوق محفوظة</p>
+    </footer>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         var errorDiv = document.querySelector('.error-messages');

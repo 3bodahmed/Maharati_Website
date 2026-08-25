@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تعديل الطلب - مهارتي</title>
-    <link rel="stylesheet" href="{{ asset('HomeClient.css') }}" />
+    <link rel="stylesheet" href="{{ asset('style.css') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" />
     <style>
         body { font-family: 'Tajawal', sans-serif; background: #0a0a1a; color: #fff; }
@@ -26,7 +26,7 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <img src="{{ asset('Logo.png') }}" alt="شعار مهارتي" class="nav-logo" />
-                <h2>في <span>مهارتي</span></h2>
+                <h2> <span>مهارتي</span></h2>
             </div>
             <div class="nav-actions">
                 <a href="{{ route('home') }}" class="btn-outline"><i class="fas fa-home"></i> الرئيسية</a>
@@ -85,5 +85,8 @@
             </form>
         </div>
     </main>
+    <footer class="guest-footer">
+        <p>© 2026 <span>مهارتي</span> - جميع الحقوق محفوظة</p>
+    </footer>
 </body>
 </html>

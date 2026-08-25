@@ -14,15 +14,20 @@ class OrderController extends Controller
      */
   public function create(Request $request)
 {
-    // جلب المنشور إن وجد، أو إرجاع null تلقائياً دون استثناء أخطاء
+     $user = Auth::user();
+        $profile = $user->profile; 
+
+        $imageUrl = $profile && $profile->image 
+            ? asset('storage/' . json_decode($profile->image, true)[0]) 
+            : 'https://i.pravatar.cc/50?img=' . $user->id;
+
     $post = $request->filled('post_id') 
         ? Post::with('user')->find($request->post_id) 
         : null;
 
-    // استخراج معرف مقدم الخدمة من المنشور أو من الطلب المباشر
     $providerId = $request->input('provider_id') ?? $post?->user_id;
 
-    return view('OrderCreate', compact('post', 'providerId'));
+    return view('OrderCreate', compact('post', 'providerId','imageUrl'));
 }
     /**
      * حفظ الطلب الجديد
@@ -119,14 +124,5 @@ public function update(Request $request, Order $order)
         return view('orders.index', compact('orders'));
     }
 
-    /**
-     * عرض تفاصيل طلب معين (اختياري)
-     */
-    public function show(Order $order)
-    {
-        if ($order->user_id !== Auth::id() && $order->provider_id !== Auth::id()) {
-            abort(403, 'غير مصرح لك بمشاهدة هذا الطلب');
-        }
-        return view('orders.show', compact('order'));
-    }
+   
 }

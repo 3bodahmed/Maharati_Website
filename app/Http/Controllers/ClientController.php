@@ -92,8 +92,6 @@ class ClientController extends Controller
             $imagePaths = $profile ? $profile->image : null;
         }
 
-         // ------------------- معالجة صور الأعمال (works) -------------------
-        // معالجة صور الأعمال (works) - إضافة فوق القديم
         if ($request->hasFile('works')) {
             // جلب الصور القديمة إن وجدت
             $oldWorks = $profile && $profile->works ? json_decode($profile->works, true) : [];
@@ -145,6 +143,7 @@ class ClientController extends Controller
         $message = $profile->wasRecentlyCreated ? 'تم إنشاء البروفايل بنجاح' : 'تم تحديث البروفايل بنجاح';
         return redirect()->back()->with('success', $message);
     }
+    
     public function deleteWorkImage(Request $request)
 {
     $request->validate([

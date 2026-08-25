@@ -1,19 +1,56 @@
 <!doctype html>
 <html lang="ar">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"></noscript>
-    <link rel="stylesheet" href="{{ asset('Profile.css') }}" />
+    <link rel="stylesheet" href="{{ asset('style.css') }}" />
     <title>الملف الشخصي - مهارتي</title>
     <link rel="icon" href="{{ asset('Logo.png') }}" />
     <style>
+        .head-post {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn-new-request:hover{
+            color: white;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(231, 76, 60, 0.25);
+            transition: all 0.3s ease;
+        }
+        .btn-delete:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(231, 76, 60, 0.4);
+        }
+        .btn-edit-profile:hover{
+            color: white;
+        }
+        .btn-delete:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+        }
+        .btn-delete:focus-visible {
+            outline: 3px solid #000000;
+            outline-offset: 3px;
+        }
         .tab-content {
             display: none;
         }
@@ -30,26 +67,155 @@
         .status.in_progress { background: #3498db; color: #fff; }
         .status.completed { background: #2ecc71; color: #000; }
         .status.cancelled { background: #e74c3c; color: #fff; }
+
+        .orders-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .stat-badge {
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            background: var(--color-bg, #f8fafc);
+            border: 1px solid var(--color-border, #e2e8f0);
+            color: var(--color-text-secondary, #475569);
+        }
+        .stat-badge.pending { border-color: #f39c12; color: #f39c12; background: rgba(243, 156, 18, 0.08); }
+        .stat-badge.in_progress { border-color: #3498db; color: #3498db; background: rgba(52, 152, 219, 0.08); }
+        .stat-badge.completed { border-color: #2ecc71; color: #2ecc71; background: rgba(46, 204, 113, 0.08); }
+        .stat-badge.cancelled { border-color: #e74c3c; color: #e74c3c; background: rgba(231, 76, 60, 0.08); }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .order-item {
+            background: var(--color-surface, #ffffff);
+            border: 1px solid var(--color-border, #e2e8f0);
+            border-radius: 20px;
+            padding: 18px 22px;
+            transition: all 0.2s ease;
+        }
+        .order-item:hover {
+            border-color: var(--color-primary, #1a73e8);
+            box-shadow: var(--shadow-soft, 0 10px 30px -5px rgba(15,23,42,0.06));
+        }
+        .order-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--color-border, #e2e8f0);
+            padding-bottom: 8px;
+        }
+        .order-id {
+            font-weight: 700;
+            color: var(--color-text-light, #94a3b8);
+            font-size: 0.9rem;
+        }
+        .order-body h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--color-text, #0f172a);
+            margin-bottom: 6px;
+        }
+        .order-body p {
+            margin: 4px 0;
+            color: var(--color-text-secondary, #475569);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .order-body p i {
+            width: 18px;
+            color: var(--color-primary, #1a73e8);
+        }
+        .order-date {
+            font-size: 0.8rem;
+            color: var(--color-text-light, #94a3b8) !important;
+        }
+        .order-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .order-actions .btn-edit-profile,
+        .order-actions .btn-delete,
+        .order-actions .btn-accept,
+        .order-actions .btn-reject {
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            text-decoration: none;
+        }
+        .btn-accept {
+            background: #2ecc71;
+            color: #000;
+        }
+        .btn-accept:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+        .btn-reject {
+            background: #e74c3c;
+            color: #fff;
+        }
+        .btn-reject:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        /* زر العودة إلى لوحة التحكم (مخصص للمدير) */
+        .btn-dashboard {
+            background: rgba(241, 196, 15, 0.15);
+            border: 1px solid #f1c40f;
+            color: #f1c40f;
+            padding: 8px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-dashboard:hover {
+            background: rgba(241, 196, 15, 0.25);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+            .order-item { padding: 14px 16px; }
+            .order-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+            .order-actions { flex-direction: column; width: 100%; }
+            .order-actions form,
+            .order-actions a {
+                width: 100%;
+            }
+            .order-actions .btn-edit-profile,
+            .order-actions .btn-delete,
+            .order-actions .btn-accept,
+            .order-actions .btn-reject {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
-    @if ($errors->any())
-        <div class="error-messages">
-            <h1 class="error-title">يوجد خطأ في البيانات المدخلة</h1>
-            <ul class="error-list">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="success-message">
-            <ul class="error-list">
-                <li>{{ session('success') }}</li>
-            </ul>
-        </div>
-    @endif
 
     @php
         $firstImage = null;
@@ -61,24 +227,34 @@
                 $avatarUrl = Storage::url($firstImage) . '?v=' . ($profile->updated_at->timestamp ?? time());
             }
         }
+        // تحديد إذا كان المستخدم الحالي مديراً أم لا
+        $isAdmin = Auth::check() && Auth::user()->isAdmin();
     @endphp
 
     <header class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
                 <img src="{{ asset('Logo.png') }}" alt="شعار مهارتي" class="nav-logo" />
-                <h2>في <span>مهارتي</span></h2>
+                <h2> <span>مهارتي</span></h2>
             </div>
             <div class="nav-actions">
+                @if(!$isAdmin)
                 <a href="{{ route('home') }}" class="btn-outline"><i class="fas fa-home"></i> الرئيسية</a>
+                @endif
                 @auth
+                    {{-- إذا كان المستخدم مديراً، أضف زر لوحة التحكم --}}
+                    @if($isAdmin)
+                        <a href="{{ route('admin.dashboard') }}" class="btn-dashboard">
+                            <i class="fas fa-chart-pie"></i> لوحة التحكم
+                        </a>
+                    @endif
+
                     <span style="opacity:0.8; margin:0 5px;"><i class="fas fa-user"></i> {{ Auth::user()->name }}</span>
                     <img src="{{ $avatarUrl }}" alt="صورة البروفايل" class="user-avatar" fetchpriority="high" width="36" height="36" />
-                    @if(isset($isOwner) && $isOwner)
+                    @if (isset($isOwner) && $isOwner)
                         <a href="{{ route('login') }}" class="btn-outline" >
                             <i class="fas fa-sign-out-alt"></i> خروج
                         </a>
-                       
                     @else
                         <a href="{{ route('profile') }}" class="btn-outline"><i class="fas fa-user-circle"></i> ملفي</a>
                     @endif
@@ -114,8 +290,14 @@
                 </div>
             </div>
             <div class="profile-actions">
-                @if(isset($isOwner) && $isOwner)
-                    <a href="{{ route('EditProfile') }}" class="btn-edit-profile"><i class="fas fa-pen"></i> تعديل الملف</a>
+                @if (isset($isOwner) && $isOwner)
+                    <a href="{{ route('EditProfile') }}" class="btn-edit-profile" ><i class="fas fa-pen"></i> تعديل الملف</a>
+                @endif
+                {{-- إذا كان المستخدم مديراً ويزور ملفه الشخصي، أضف زر لوحة التحكم أيضاً هنا --}}
+                @if($isAdmin && isset($isOwner) && $isOwner)
+                    <a href="{{ route('admin.dashboard') }}" class="btn-dashboard" style="margin-top:10px; display:inline-block;">
+                        <i class="fas fa-chart-pie"></i> لوحة التحكم
+                    </a>
                 @endif
             </div>
         </div>
@@ -125,14 +307,13 @@
             <div class="stat-item"><span class="stat-number">{{ $posts->count() }}</span><span class="stat-label">منشورات</span></div>
             <div class="stat-item"><span class="stat-number">{{ $orders->count() }}</span><span class="stat-label">الطلبات المرسله</span></div>
             <div class="stat-item"><span class="stat-number">{{ $receivedOrders->count() }}</span><span class="stat-label">الطلبات الواردة</span></div>
-
         </div>
 
         <!-- ===== Tabs ===== -->
         <div class="profile-tabs">
-            <button class="tab-btn active" data-tab="posts"><i class="fas fa-newspaper"></i> @if(isset($isOwner) && $isOwner) منشوراتي @else منشوراته @endif</button>
+            <button class="tab-btn active" data-tab="posts"><i class="fas fa-newspaper"></i> @if (isset($isOwner) && $isOwner) منشوراتي @else منشوراته @endif</button>
             <button class="tab-btn" data-tab="portfolio"><i class="fas fa-images"></i> محفظة الأعمال</button>
-            @if(isset($isOwner) && $isOwner)
+            @if (isset($isOwner) && $isOwner)
                 <button class="tab-btn" data-tab="orders"><i class="fas fa-paper-plane"></i> طلباتي المرسلة</button>
                 <button class="tab-btn" data-tab="received"><i class="fas fa-inbox"></i> الطلبات الواردة</button>
             @endif
@@ -141,8 +322,8 @@
         <!-- ===== تبويب المنشورات ===== -->
         <section id="tab-posts" class="tab-content active">
             <div class="posts-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
-                <h3><i class="fas fa-newspaper"></i> @if(isset($isOwner) && $isOwner) منشوراتي @else منشوراته @endif</h3>
-                @if(isset($isOwner) && $isOwner)
+                <h3><i class="fas fa-newspaper"></i> @if (isset($isOwner) && $isOwner) منشوراتي @else منشوراته @endif</h3>
+                @if (isset($isOwner) && $isOwner)
                     <a href="{{ route('CreatePost') }}"><button class="btn-new-post" style="padding:8px 20px; background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); border-radius:50px; color:#fff; font-weight:700; font-family:var(--font-family); cursor:pointer; transition:0.15s; display:flex; align-items:center; gap:8px;"><i class="fas fa-plus"></i> إنشاء منشور</button></a>
                 @endif
             </div>
@@ -161,11 +342,25 @@
                         }
                     @endphp
                     <div class="post-card post-client">
-                        <div class="post-type {{ $post->typeRequest === 'provider' ? 'provider-type' : '' }}">
-                            @if ($post->typeRequest === 'client')
-                                <i class="fas fa-user-plus"></i> طلب خدمة
-                            @else
-                                <i class="fas fa-briefcase"></i> خدمة مقدمة
+                        <div class="head-post">
+                            <div class="post-type {{ $post->typeRequest === 'provider' ? 'provider-type' : '' }}">
+                                @if ($post->typeRequest === 'client')
+                                    <i class="fas fa-user-plus"></i> طلب خدمة
+                                @else
+                                    <i class="fas fa-briefcase"></i> خدمة مقدمة
+                                @endif
+                            </div>
+                            @if (isset($isOwner) && $isOwner)
+                                <div style="display: flex;">
+                                    <form action="{{ route('post.destroy', $post->id) }}" method="POST">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="btn-delete"
+                                            onclick="return confirm('هل أنت متأكد؟')">حذف</button>
+                                    </form>
+                                    <button class="btn-delete" style="background: rgb(227, 227, 55);margin:0 10px">
+                                        <a href="{{ route('post.edit', $post->id) }}" style="text-decoration: none;color:white;" >تعديل</a>
+                                    </button>
+                                </div>
                             @endif
                         </div>
                         <div class="post-header">
@@ -202,14 +397,14 @@
                 </span>
             </div>
 
-            @if(isset($isOwner) && $isOwner)
+            @if (isset($isOwner) && $isOwner)
                 <form enctype="multipart/form-data" method="POST" action="{{ route('CreateProfile') }}">
                     @csrf
                     <div class="portfolio-grid">
-                        @if($profile && $profile->works)
+                        @if ($profile && $profile->works)
                             @php $worksImages = json_decode($profile->works, true); @endphp
-                            @if(is_array($worksImages) && count($worksImages) > 0)
-                                @foreach($worksImages as $workImage)
+                            @if (is_array($worksImages) && count($worksImages) > 0)
+                                @foreach ($worksImages as $workImage)
                                     <div class="portfolio-item" data-image="{{ $workImage }}">
                                         <img src="{{ Storage::url($workImage) }}" alt="عمل" loading="lazy" decoding="async" width="200" height="200" />
                                         <div class="overlay">
@@ -235,10 +430,10 @@
                 </form>
             @else
                 <div class="portfolio-grid">
-                    @if($profile && $profile->works)
+                    @if ($profile && $profile->works)
                         @php $worksImages = json_decode($profile->works, true); @endphp
-                        @if(is_array($worksImages) && count($worksImages) > 0)
-                            @foreach($worksImages as $workImage)
+                        @if (is_array($worksImages) && count($worksImages) > 0)
+                            @foreach ($worksImages as $workImage)
                                 <div class="portfolio-item">
                                     <img src="{{ Storage::url($workImage) }}" alt="عمل" loading="lazy" decoding="async" width="200" height="200" />
                                 </div>
@@ -254,105 +449,141 @@
         </section>
 
         <!-- ===== تبويب الطلبات المرسلة ===== -->
-        @if(isset($isOwner) && $isOwner)
-            <section id="tab-orders" class="tab-content">
-                <div class="orders-header" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
-                    <h3><i class="fas fa-clipboard-list"></i> طلباتي المرسلة</h3>
-                    <a href="{{ route('orders.create') }}" class="btn-new-request" style="padding:8px 20px; background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); border-radius:50px; color:#fff; font-weight:700; font-family:var(--font-family); cursor:pointer; transition:0.15s; display:flex; align-items:center; gap:8px; text-decoration:none;">
-                        <i class="fas fa-plus"></i> طلب جديد
-                    </a>
-                </div>
-                <div class="orders-list">
-                    @forelse($orders as $order)
-                        <div class="order-item">
-                            <div class="info">
-                                <h4>{{ $order->title }}</h4>
-                                <p><i class="fas fa-user"></i> {{ $order->provider ? $order->provider->name : 'لم يتم تعيين' }} · {{ $order->location ?? 'بدون موقع' }}</p>
-                                <p><i class="fas fa-dollar-sign"></i> {{ $order->price ?? 'غير محدد' }} ريال</p>
-                            </div>
+        @if (isset($isOwner) && $isOwner)
+        <section id="tab-orders" class="tab-content">
+            <div class="orders-header" style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <h3><i class="fas fa-paper-plane"></i> طلباتي المرسلة</h3>
+                <a href="{{ route('orders.create') }}" class="btn-new-request" >
+                    <i class="fas fa-plus"></i> طلب جديد
+                </a>
+            </div>
+
+            <div class="orders-stats">
+                <span class="stat-badge pending">قيد الانتظار: {{ $orders->where('status', 'pending')->count() }}</span>
+                <span class="stat-badge in_progress">قيد التنفيذ: {{ $orders->where('status', 'in_progress')->count() }}</span>
+                <span class="stat-badge completed">مكتمل: {{ $orders->where('status', 'completed')->count() }}</span>
+                <span class="stat-badge cancelled">ملغي: {{ $orders->where('status', 'cancelled')->count() }}</span>
+            </div>
+
+            <div class="orders-list">
+                @forelse($orders as $order)
+                    <div class="order-item">
+                        <div class="order-head">
+                            <span class="order-id">#{{ $order->id }}</span>
                             <span class="status {{ $order->status }}">
                                 @switch($order->status)
-                                    @case('pending') قيد الانتظار @break
-                                    @case('in_progress') قيد التنفيذ @break
-                                    @case('completed') مكتمل @break
-                                    @case('cancelled') ملغي @break
+                                    @case('pending')   <i class="fas fa-clock"></i> قيد الانتظار @break
+                                    @case('in_progress') <i class="fas fa-spinner"></i> قيد التنفيذ @break
+                                    @case('completed') <i class="fas fa-check-circle"></i> مكتمل @break
+                                    @case('cancelled') <i class="fas fa-times-circle"></i> ملغي @break
                                 @endswitch
                             </span>
-                            <div style="margin-top:10px;">
-                                <a href="{{ route('orders.edit', $order->id) }}" class="btn-edit-profile" style="padding:4px 12px; font-size:0.8rem;margin:5px;width:70px;">تعديل</a>
-                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn-edit-profile" style="background:#c0392b; padding:4px 12px; font-size:0.8rem;margin:5px;width:70px" onclick="return confirm('هل أنت متأكد؟')">حذف</button>
-                                </form>
-                            </div>
                         </div>
-                    @empty
-                        <p style="text-align:center; opacity:0.7;">لا توجد طلبات مرسلة</p>
-                    @endforelse
-                </div>
-            </section>
+                        <div class="order-body">
+                            <h4>{{ $order->title }}</h4>
+                            <p><i class="fas fa-user"></i> المقدم: {{ $order->provider ? $order->provider->name : 'لم يتم تعيين' }}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> {{ $order->location ?? 'بدون موقع' }}</p>
+                            <p><i class="fas fa-money-bill-wave"></i> {{ $order->price ?? 'غير محدد' }} ريال</p>
+                            <p class="order-date"><i class="far fa-calendar-alt"></i> {{ $order->created_at->format('Y-m-d') }}</p>
+                        </div>
+                        <div class="order-actions">
+                            <a href="{{ route('orders.edit', $order->id) }}" class="btn-edit-profile" style="padding:6px 16px; font-size:0.8rem;">
+                                <i class="fas fa-pen"></i> تعديل
+                            </a>
+                            <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display:inline-block;">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="btn-delete" style="padding:6px 16px; font-size:0.8rem;" onclick="return confirm('هل أنت متأكد من حذف هذا الطلب؟')">
+                                    <i class="fas fa-trash"></i> حذف
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @empty
+                    <p style="text-align:center; opacity:0.7; padding:20px 0;">لا توجد طلبات مرسلة</p>
+                @endforelse
+            </div>
+        </section>
         @endif
 
         <!-- ===== تبويب الطلبات الواردة ===== -->
-        @if(isset($isOwner) && $isOwner)
-            <section id="tab-received" class="tab-content">
-                <div class="orders-header" style="margin-bottom:20px;">
-                    <h3><i class="fas fa-inbox"></i> الطلبات الواردة</h3>
-                </div>
-                <div class="orders-list">
-                    @if(isset($receivedOrders) && $receivedOrders->count() > 0)
-                        @foreach($receivedOrders as $order)
-                            <div class="order-item">
-                                <div class="info">
-                                    <h4>{{ $order->title }}</h4>
-                                    <p><i class="fas fa-user"></i> من: {{ $order->user->name ?? 'مستخدم غير معروف' }} · {{ $order->location ?? 'بدون موقع' }}</p>
-                                    <p><i class="fas fa-dollar-sign"></i> {{ $order->price ?? 'غير محدد' }} ريال</p>
-                                </div>
+        @if (isset($isOwner) && $isOwner)
+        <section id="tab-received" class="tab-content">
+            <div class="orders-header" style="margin-bottom:20px;">
+                <h3><i class="fas fa-inbox"></i> الطلبات الواردة</h3>
+            </div>
+
+            <div class="orders-stats">
+                <span class="stat-badge pending">قيد الانتظار: {{ $receivedOrders->where('status', 'pending')->count() }}</span>
+                <span class="stat-badge in_progress">قيد التنفيذ: {{ $receivedOrders->where('status', 'in_progress')->count() }}</span>
+                <span class="stat-badge completed">مكتمل: {{ $receivedOrders->where('status', 'completed')->count() }}</span>
+                <span class="stat-badge cancelled">ملغي: {{ $receivedOrders->where('status', 'cancelled')->count() }}</span>
+            </div>
+
+            <div class="orders-list">
+                @if($receivedOrders->count() > 0)
+                    @foreach($receivedOrders as $order)
+                        <div class="order-item">
+                            <div class="order-head">
+                                <span class="order-id">#{{ $order->id }}</span>
                                 <span class="status {{ $order->status }}">
                                     @switch($order->status)
-                                        @case('pending') قيد الانتظار @break
-                                        @case('in_progress') قيد التنفيذ @break
-                                        @case('completed') مكتمل @break
-                                        @case('cancelled') ملغي @break
+                                        @case('pending')   <i class="fas fa-clock"></i> قيد الانتظار @break
+                                        @case('in_progress') <i class="fas fa-spinner"></i> قيد التنفيذ @break
+                                        @case('completed') <i class="fas fa-check-circle"></i> مكتمل @break
+                                        @case('cancelled') <i class="fas fa-times-circle"></i> ملغي @break
                                     @endswitch
                                 </span>
-                                <div style="margin-top:10px;">
+                            </div>
+                            <div class="order-body">
+                                <h4>{{ $order->title }}</h4>
+                                <p><i class="fas fa-user"></i> من: {{ $order->user->name ?? 'مستخدم غير معروف' }}</p>
+                                <p><i class="fas fa-map-marker-alt"></i> {{ $order->location ?? 'بدون موقع' }}</p>
+                                <p><i class="fas fa-money-bill-wave"></i> {{ $order->price ?? 'غير محدد' }} ريال</p>
+                                <p class="order-date"><i class="far fa-calendar-alt"></i> {{ $order->created_at->format('Y-m-d') }}</p>
+                            </div>
+                            <div class="order-actions">
+                                @if($order->status == 'pending')
                                     <form action="{{ route('orders.update', $order->id) }}" method="POST" style="display:inline-block;">
                                         @csrf @method('PUT')
                                         <input type="hidden" name="status" value="in_progress">
-                                        <button type="submit" class="btn-edit-profile" style="background:#2ecc71; padding:4px 12px; font-size:0.8rem;">قبول</button>
+                                        <button type="submit" class="btn-accept"><i class="fas fa-check"></i> قبول</button>
                                     </form>
                                     <form action="{{ route('orders.update', $order->id) }}" method="POST" style="display:inline-block;">
                                         @csrf @method('PUT')
                                         <input type="hidden" name="status" value="cancelled">
-                                        <button type="submit" class="btn-edit-profile" style="background:#e74c3c; padding:4px 12px; font-size:0.8rem;">رفض</button>
+                                        <button type="submit" class="btn-reject"><i class="fas fa-times"></i> رفض</button>
                                     </form>
-                                </div>
+                                @else
+                                    <span style="opacity:0.6; font-size:0.9rem;">تم الرد</span>
+                                @endif
                             </div>
-                        @endforeach
-                    @else
-                        <p style="text-align:center; opacity:0.7;">لا توجد طلبات واردة</p>
-                    @endif
-                </div>
-            </section>
+                        </div>
+                    @endforeach
+                @else
+                    <p style="text-align:center; opacity:0.7; padding:20px 0;">لا توجد طلبات واردة</p>
+                @endif
+            </div>
+        </section>
         @endif
 
     </main>
+    <footer class="guest-footer">
+        <p>© 2026 <span>مهارتي</span> - جميع الحقوق محفوظة</p>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ===== التبويبات =====
             const tabs = document.querySelectorAll('.tab-btn');
-            
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     tabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
+
                     document.querySelectorAll('.tab-content').forEach(content => {
                         content.classList.remove('active');
                     });
-                    
+
                     const tabName = this.dataset.tab;
                     const target = document.getElementById('tab-' + tabName);
                     if (target) {
@@ -365,11 +596,11 @@
             const fileInput = document.querySelector('input[name="works[]"]');
             const portfolioGrid = document.querySelector('.portfolio-grid');
             if (fileInput && portfolioGrid) {
-                fileInput.addEventListener('change', function (e) {
+                fileInput.addEventListener('change', function(e) {
                     const files = Array.from(e.target.files);
                     files.forEach(file => {
                         const reader = new FileReader();
-                        reader.onload = function (ev) {
+                        reader.onload = function(ev) {
                             const item = document.createElement('div');
                             item.className = 'portfolio-item';
                             item.innerHTML = `
@@ -391,28 +622,30 @@
         function deleteWorkImage(imagePath) {
             if (!confirm('هل أنت متأكد من حذف هذه الصورة؟')) return;
             fetch('{{ route('delete.work.image') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({ image: imagePath })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const item = document.querySelector(`[data-image="${imagePath}"]`);
-                    if (item) item.remove();
-                    const counter = document.querySelector('.portfolio-header span');
-                    if (counter) {
-                        let count = parseInt(counter.textContent.trim()) || 0;
-                        counter.textContent = (count - 1) + ' صور';
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        image: imagePath
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const item = document.querySelector(`[data-image="${imagePath}"]`);
+                        if (item) item.remove();
+                        const counter = document.querySelector('.portfolio-header span');
+                        if (counter) {
+                            let count = parseInt(counter.textContent.trim()) || 0;
+                            counter.textContent = (count - 1) + ' صور';
+                        }
+                    } else {
+                        alert('فشل الحذف: ' + data.message);
                     }
-                } else {
-                    alert('فشل الحذف: ' + data.message);
-                }
-            })
-            .catch(error => console.error('خطأ:', error));
+                })
+                .catch(error => console.error('خطأ:', error));
         }
     </script>
 </body>

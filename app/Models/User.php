@@ -25,6 +25,7 @@ class User extends Authenticatable
         'username',   
         'country',    
         'region', 
+        'role','facebook_id', 'google_id',
     ];
 
     /**
@@ -63,5 +64,13 @@ class User extends Authenticatable
 public function providedOrders()
 {
     return $this->hasMany(Order::class, 'provider_id');
+}
+public function isAdmin()
+{
+    return $this->role === 'admin';
+}
+public function isClient()
+{
+    return $this->role === 'client';
 }
 }
