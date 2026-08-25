@@ -1,59 +1,40 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛠️ مهارتي  (Maharati)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+منصة إلكترونية متكاملة تهدف إلى سد الفجوة بين طالبي الخدمات ومقدميها في العالم العربي. 
+سواء كنت تبحث عن حرفي متميز لإنجاز مهمة ما، أو كنت صاحب مهارة ترغب في عرض خدماتك والوصول إلى عملاء جدد، فإن "مهارتي " هي وجهتك المثالية.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📖 عن المنصة
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+توفر المنصة بيئة موثوقة وسهلة الاستخدام تجمع بين فئتين رئيسيتين:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **طالب الخدمة**: يستطيع البحث عن الحرفيين والمتخصصين في مختلف المجالات (سباكة، كهرباء، تصميم، برمجة، صيانة، وغيرها) بناءً على الموقع، والسعر.
+- **مقدم الخدمة (الحرفي/المتخصص)**: يحصل على ملف شخصي احترافي يعرض مهاراته، أعماله السابقة، وأسعاره، مع إمكانية استقبال الطلبات مباشرة من العملاء.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## ✨ المميزات الرئيسية
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **🔍 بحث ذكي ومتقدم**: فلترة الحرفيين حسب التخصص، المدينة،.
+- **📋 ملفات تعريفية غنية**: لكل حرفي ملف متكامل يشمل معرض أعماله، شهاداته، .
+- **📅 نظام حجز وإدارة مواعيد**: إمكانية حجز موعد مباشر مع مقدم الخدمة وتتبع حالة الطلب.
+- **⭐ نظام تقييم ومراجعات**: يضمن الشفافية ويساعد في بناء سمعة موثوقة لكل حرفي.
+- **📊 لوحات تحكم تفاعلية**:
+  - لوحة تحكم للعميل لمتابعة طلباته وتاريخه.
+  - لوحة تحكم للحرفي لإدارة الطلبات الواردة وجدول أعماله.
+  - لوحة تحكم للمشرف (Admin) لإدارة المنصة بكفاءة.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🧰 التقنيات المستخدمة (Tech Stack)
 
-### Premium Partners
+تم بناء المنصة باستخدام إطار العمل **Laravel** للاستفادة من ميزاته القوية التي تضمن السرعة والأمان وقابلية التوسع:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **الواجهة الخلفية**: Laravel (PHP) - يستخدم نظام التوجيه (Routing) السريع، وحاوية الإعتماديات (Dependency Injection)، وORM المتقدم (Eloquent).
+- **قاعدة البيانات**:MySQL مع نظام الهجرة (Migrations) الخاص بـ Laravel.
+- **المهام الخلفية**: نظام معالجة المهام (Queues) والوظائف المجدولة للتعامل مع الإشعارات والبريد الإلكتروني.
+- **الواجهة الأمامية**: Blade Templates / Vue.js (أو أي تقنية تختارها) مع استخدام Ajax للتفاعلية.
+- **البث المباشر**: استخدام Event Broadcasting للإشعارات في الوقت الفعلي.
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
